@@ -50,3 +50,40 @@ export const ProfileRelationsBoxWrapper = styled(Box)`
     }
   }
 `; 
+
+export const ProfileRelations = (propriedades) => {
+  
+  let lista = [...propriedades.lista];
+
+  if ( typeof propriedades.lista[0] === "string" ) {
+    lista = [...propriedades.lista.map(itemAtual => {
+      return {
+        id: itemAtual, 
+        image: `https://github.com/${itemAtual}.png`,
+        title: itemAtual
+      }
+    })]
+  } 
+
+
+  return (
+    <ProfileRelationsBoxWrapper>
+      <h2 className="smallTitle">
+        {propriedades.titulo} ({lista.length})
+      </h2>
+
+      <ul>
+        {lista.slice(0,6).map((itemAtual) => {
+          return (
+            <li id={itemAtual.id}>
+              <a href={`/users/${itemAtual.title}`} key={itemAtual.title}>
+              <img src={itemAtual.image} />
+                <span>{itemAtual.title}</span>
+              </a>
+            </li>
+          )
+        })}            
+      </ul>
+    </ProfileRelationsBoxWrapper>
+  );
+};
