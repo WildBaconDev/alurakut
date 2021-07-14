@@ -64,7 +64,8 @@ export default function Home() {
               const comunidade = {
                 id: new Date().toISOString(),
                 title: dadosDoForm.get('title'),
-                image: dadosDoForm.get('image') ? dadosDoForm.get('image') : 'https://picsum.photos/200/300'
+                image: dadosDoForm.get('image') ? dadosDoForm.get('image') : 'https://picsum.photos/200/300',
+                link: dadosDoForm.get('link') ? dadosDoForm.get('link') : 'https://www.alura.com.br/stars'
               }
               setComunidades([...comunidades, comunidade])
             }}>
@@ -82,6 +83,14 @@ export default function Home() {
                   placeholder="Coloque uma URL para usarmos de capa" 
                   name="image" 
                   aria-label="Coloque uma URL para usarmos de capa"
+                />
+              </div>
+              
+              <div>
+                <input 
+                  placeholder="Coloque uma URL para usarmos de Link" 
+                  name="link" 
+                  aria-label="Coloque uma URL para usarmos de Link"
                 />
               </div>
 

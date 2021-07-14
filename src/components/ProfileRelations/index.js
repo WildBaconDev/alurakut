@@ -58,9 +58,10 @@ export const ProfileRelations = (propriedades) => {
   if ( typeof propriedades.lista[0] === "string" ) {
     lista = [...propriedades.lista.map(itemAtual => {
       return {
-        id: itemAtual, 
+        id: itemAtual + new Date().toISOString(), 
         image: `https://github.com/${itemAtual}.png`,
-        title: itemAtual
+        title: itemAtual,
+        link: `https://github.com/${itemAtual}`
       }
     })]
   } 
@@ -75,8 +76,8 @@ export const ProfileRelations = (propriedades) => {
       <ul>
         {lista.slice(0,6).map((itemAtual) => {
           return (
-            <li id={itemAtual.id}>
-              <a href={`/users/${itemAtual.title}`} key={itemAtual.title}>
+            <li id={itemAtual.id} key={itemAtual.id}>
+              <a href={itemAtual.link} >
               <img src={itemAtual.image} />
                 <span>{itemAtual.title}</span>
               </a>
