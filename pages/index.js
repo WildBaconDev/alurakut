@@ -23,8 +23,6 @@ function ProfileSidebar(propriedades) {
   );
 }
 
-
-
 export default function Home() {
   const githubUser = 'WildBaconDev';
   
@@ -35,6 +33,26 @@ export default function Home() {
   }]);
 
   const pessoasFavoritas = ['juunegreiros', 'omariosouto', 'peas', 'rafaballerini', 'marcobruno', 'felipefialho'];
+
+  const [seguidores, setSeguidores] = React.useState([]);
+
+  React.useEffect(() => {
+    fetch(`https://api.github.com/users/${githubUser}/followers`)
+      .then((respostaDoServidor) => {
+        return respostaDoServidor.json();
+      })
+      .then((respostaCompleta) => {
+        setSeguidores(respostaCompleta.map(obj => {
+          return {
+            id: obj.login + new Date().toISOString(), 
+            image: `https://github.com/${obj.login}.png`,
+            title: obj.login,
+            link: `https://github.com/${obj.login}`
+          }
+        }));
+      });
+  }, []);
+
 
   return (
     <>
@@ -102,8 +120,9 @@ export default function Home() {
         </div>
 
         <div className="profileRelationsArea" style={{ gridArea: 'profileRelationsArea' }}>
-          <ProfileRelations titulo={"Comunidades"} lista={comunidades}></ProfileRelations>
-          <ProfileRelations titulo={"Pessoas da comunidade"} lista={pessoasFavoritas}></ProfileRelations>
+          <ProfileRelations titulo="Seguidores" lista={seguidores}></ProfileRelations>
+          <ProfileRelations titulo="Comunidades" lista={comunidades}></ProfileRelations>
+          <ProfileRelations titulo="Pessoas da comunidade" lista={pessoasFavoritas}></ProfileRelations>
         </div>
       </MainGrid>
     </>

@@ -51,12 +51,10 @@ export const ProfileRelationsBoxWrapper = styled(Box)`
   }
 `; 
 
-export const ProfileRelations = (propriedades) => {
-  
-  let lista = [...propriedades.lista];
+export const ProfileRelations = ({titulo, lista}) => {
 
-  if ( typeof propriedades.lista[0] === "string" ) {
-    lista = [...propriedades.lista.map(itemAtual => {
+  if ( typeof lista[0] === "string" ) {
+    lista = [...lista.map(itemAtual => {
       return {
         id: itemAtual + new Date().toISOString(), 
         image: `https://github.com/${itemAtual}.png`,
@@ -70,7 +68,7 @@ export const ProfileRelations = (propriedades) => {
   return (
     <ProfileRelationsBoxWrapper>
       <h2 className="smallTitle">
-        {propriedades.titulo} ({lista.length})
+        {titulo} ({lista.length})
       </h2>
 
       <ul>
