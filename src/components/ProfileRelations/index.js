@@ -76,7 +76,7 @@ export const ProfileRelations = ({titulo, lista}) => {
           return (
             <li id={itemAtual.id} key={itemAtual.id}>
               <a href={itemAtual.link} >
-              <img src={itemAtual.image} />
+              <img src={itemAtual.image ? itemAtual.image : itemAtual.imageUrl} />
                 <span>{itemAtual.title}</span>
               </a>
             </li>
